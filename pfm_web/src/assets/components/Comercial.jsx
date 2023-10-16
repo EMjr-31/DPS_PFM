@@ -10,8 +10,8 @@ function Comercial({user}) {
   const [selectedItem, setSelectedItem] = useState(null);
 
   useEffect(() => {
-    // Realiza una solicitud a la API para obtener datos JSON
-    fetch('http://127.0.0.1:8000/api/propuestas')
+    // Realiza una solicitud a la API para obtener datos JSON de clientes
+    fetch('http://127.0.0.1:8000/api/clientes')
       .then(response => response.json())
       .then(data => {
         setData(data);
@@ -30,33 +30,42 @@ function Comercial({user}) {
         </div>
         {/* Opciones en el lado izquierdo */}
         <ul>
-            <li> 
-                <div className='opcion' id='op_seleccionada'>
+        <li> 
+              <a href='/Gerencia'>
+              <div className='opcion' >
                     <FontAwesomeIcon icon={faBriefcase}/> 
                     <p>Gerencia</p> 
                     <FontAwesomeIcon icon={faChevronRight}/> 
                 </div>
+              </a>
             </li>
             <li> 
-                <div className='opcion'>
+              <a href='/Comercial' >
+              <div className='opcion' id='op_seleccionada'>
                     <FontAwesomeIcon icon={faShop}/> 
                     <p>Comercial</p> 
                     <FontAwesomeIcon icon={faChevronRight}/> 
                 </div>
+              </a>
             </li>
             <li> 
+            <a href='/RRHH'>
                 <div className='opcion'>
                     <FontAwesomeIcon icon={faUsers}/> 
                     <p>Recursos Humanos</p> 
                     <FontAwesomeIcon icon={faChevronRight}/> 
                 </div>
+            </a>
             </li>
             <li> 
-                <div className='opcion'>
+            <a href='/Historial'>
+            <div className='opcion'>
                     <FontAwesomeIcon icon={faClock}/> 
                     <p>Historial</p> 
                     <FontAwesomeIcon icon={faChevronRight}/> 
                 </div>
+            </a>
+               
             </li>
           {/* Agrega más opciones según tus necesidades */}
         </ul>
@@ -66,10 +75,12 @@ function Comercial({user}) {
                     <p>Ajustes</p> 
                     <FontAwesomeIcon icon={faGear}/> 
                 </div>
-                <div className='opcion'>
-                    <p>Cerrar Sesion</p> 
-                    <FontAwesomeIcon icon={faRightFromBracket}/> 
-                </div>
+                <a href='/login'>
+                  <div className='opcion'>
+                      <p>Cerrar Sesion</p> 
+                      <FontAwesomeIcon icon={faRightFromBracket}/> 
+                  </div>
+                </a>
         </div>
       </div>
       <div className="content">
@@ -90,47 +101,40 @@ function Comercial({user}) {
         </div>
         {/* Tabla de datos con opciones de ver, eliminar y modificar */}
         <div className="table-container">
-  <h2>Título de la Tabla</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Fecha de Envío</th>
-        <th>ID de Ejecutivo Comercial</th>
-        <th>ID de Cliente</th>
-        <th>Tipo de Propuesta</th>
-        <th>Monto de Propuesta</th>
-        <th>Descuento</th>
-        <th>Estado de Propuesta</th>
-        <th>Fecha de Actualización</th>
-        <th>Comentarios de Seguimiento</th>
-        <th>Opciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      {data.map((item, index) => (
-        <tr key={index}>
-          <td>{item.id}</td>
-          <td>{item.FechaEnvioPropuesta}</td>
-          <td>{item.UsuarioEjecutivoComercialID}</td>
-          <td>{item.ClienteID}</td>
-          <td>{item.TipoPropuestaEnviada}</td>
-          <td>{item.MontoPropuesta}</td>
-          <td>{item.Descuento}</td>
-          <td>{item.EstadoPropuesta}</td>
-          <td>{item.FechaActualizacionSeguimiento}</td>
-          <td>{item.ComentariosSeguimiento}</td>
-          <td className="opciones-contenedor">
-            <button className='btn btn-ver'> <FontAwesomeIcon icon={faEye}/> </button>
-            <button className='btn btn-modificar'> <FontAwesomeIcon icon={faPen}/> </button>
-            <button className='btn btn-eliminar'> <FontAwesomeIcon icon={faTrash}/> </button>
-          </td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-</div>
-
+          <h2>Clientes</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre Empresa</th>
+                <th>Rubro</th>
+                <th>Nombre de Contacto</th>
+                <th>Teléfono</th>
+                <th>Correo Electrónico</th>
+                <th>Ubicación</th>
+                <th>Opciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map(item => (
+                <tr key={item.id}>
+                  <td>{item.id}</td>
+                  <td>{item.nombre_empresa}</td>
+                  <td>{item.rubro}</td>
+                  <td>{item.nombre_contacto}</td>
+                  <td>{item.telefono}</td>
+                  <td>{item.correo_electronico}</td>
+                  <td>{item.ubicacion}</td>
+                  <td className="opciones-contenedor">
+                    <button className='btn btn-ver'> <FontAwesomeIcon icon={faEye} /> </button>
+                    <button className='btn btn-modificar'> <FontAwesomeIcon icon={faPen} /> </button>
+                    <button className='btn btn-eliminar'> <FontAwesomeIcon icon={faTrash} /> </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
         {/* Gráfica */}
         <div className="chart">

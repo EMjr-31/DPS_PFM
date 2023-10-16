@@ -30,33 +30,42 @@ function Gerencia({user}) {
         </div>
         {/* Opciones en el lado izquierdo */}
         <ul>
-            <li> 
-                <div className='opcion' id='op_seleccionada'>
+        <li> 
+              <a href='/Gerencia'>
+              <div className='opcion' id='op_seleccionada'>
                     <FontAwesomeIcon icon={faBriefcase}/> 
                     <p>Gerencia</p> 
                     <FontAwesomeIcon icon={faChevronRight}/> 
                 </div>
+              </a>
             </li>
             <li> 
-                <div className='opcion'>
+              <a href='/Comercial' >
+              <div className='opcion'>
                     <FontAwesomeIcon icon={faShop}/> 
                     <p>Comercial</p> 
                     <FontAwesomeIcon icon={faChevronRight}/> 
                 </div>
+              </a>
             </li>
             <li> 
+            <a href='/RRHH'>
                 <div className='opcion'>
                     <FontAwesomeIcon icon={faUsers}/> 
                     <p>Recursos Humanos</p> 
                     <FontAwesomeIcon icon={faChevronRight}/> 
                 </div>
+            </a>
             </li>
             <li> 
-                <div className='opcion'>
+            <a href='/Historial'>
+            <div className='opcion'>
                     <FontAwesomeIcon icon={faClock}/> 
                     <p>Historial</p> 
                     <FontAwesomeIcon icon={faChevronRight}/> 
                 </div>
+            </a>
+               
             </li>
           {/* Agrega más opciones según tus necesidades */}
         </ul>
@@ -66,10 +75,12 @@ function Gerencia({user}) {
                     <p>Ajustes</p> 
                     <FontAwesomeIcon icon={faGear}/> 
                 </div>
-                <div className='opcion'>
-                    <p>Cerrar Sesion</p> 
-                    <FontAwesomeIcon icon={faRightFromBracket}/> 
-                </div>
+                <a href='/login'>
+                  <div className='opcion'>
+                      <p>Cerrar Sesion</p> 
+                      <FontAwesomeIcon icon={faRightFromBracket}/> 
+                  </div>
+                </a>
         </div>
       </div>
       <div className="content">
@@ -90,7 +101,7 @@ function Gerencia({user}) {
         </div>
         {/* Tabla de datos con opciones de ver, eliminar y modificar */}
         <div className="table-container">
-  <h2>Título de la Tabla</h2>
+  <h2>Seguiminetos</h2>
   <table>
     <thead>
       <tr>

@@ -4,7 +4,9 @@ import logo from '../img/LogoPFCIniciales_.png'; // Importa la imagen
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faChartBar, faFile, faCog, faSignOutAlt ,faChevronRight,faBriefcase, faUsers, faShop, faClock, faGear,  faRightFromBracket,faSearch, faPen, faEye, faTrash, faFilePen} from '@fortawesome/free-solid-svg-icons';
 
-function Dashboard({user}) {
+function Dashboard({}) {
+  const userJSON = localStorage.getItem('user');
+
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -31,32 +33,41 @@ function Dashboard({user}) {
         {/* Opciones en el lado izquierdo */}
         <ul>
             <li> 
-                <div className='opcion' id='op_seleccionada'>
+              <a href='/Gerencia'>
+              <div className='opcion' id='op_seleccionada'>
                     <FontAwesomeIcon icon={faBriefcase}/> 
                     <p>Gerencia</p> 
                     <FontAwesomeIcon icon={faChevronRight}/> 
                 </div>
+              </a>
             </li>
             <li> 
-                <div className='opcion'>
+              <a href='/Comercial'>
+              <div className='opcion'>
                     <FontAwesomeIcon icon={faShop}/> 
                     <p>Comercial</p> 
                     <FontAwesomeIcon icon={faChevronRight}/> 
                 </div>
+              </a>
             </li>
             <li> 
+            <a href='/RRHH'>
                 <div className='opcion'>
                     <FontAwesomeIcon icon={faUsers}/> 
                     <p>Recursos Humanos</p> 
                     <FontAwesomeIcon icon={faChevronRight}/> 
                 </div>
+            </a>
             </li>
             <li> 
-                <div className='opcion'>
+            <a href='/Historial'>
+            <div className='opcion'>
                     <FontAwesomeIcon icon={faClock}/> 
                     <p>Historial</p> 
                     <FontAwesomeIcon icon={faChevronRight}/> 
                 </div>
+            </a>
+               
             </li>
           {/* Agrega más opciones según tus necesidades */}
         </ul>
@@ -66,10 +77,13 @@ function Dashboard({user}) {
                     <p>Ajustes</p> 
                     <FontAwesomeIcon icon={faGear}/> 
                 </div>
-                <div className='opcion'>
-                    <p>Cerrar Sesion</p> 
-                    <FontAwesomeIcon icon={faRightFromBracket}/> 
-                </div>
+                <a href='/login'>
+                  <div className='opcion'>
+                      <p>Cerrar Sesion</p> 
+                      <FontAwesomeIcon icon={faRightFromBracket}/> 
+                  </div>
+                </a>
+                
         </div>
       </div>
       <div className="content">
@@ -77,8 +91,6 @@ function Dashboard({user}) {
         <div className="topbar">
           <div className="search-box">
             <div className="user-info">
-            
-              
             </div>
             <input
               type="text"

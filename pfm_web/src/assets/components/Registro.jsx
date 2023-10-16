@@ -5,9 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faG} from '@fortawesome/free-solid-svg-icons';
 import { gapi } from 'gapi-script';
 import GoogleLogin from 'react-google-login';
-
-
-
+import Modal from 'react-modal'; // Importar react-modal
 
 const Registro = () => {
   const [formData, setFormData] = useState({
@@ -19,11 +17,18 @@ const Registro = () => {
   const clientID= "547404189063-leb79ce7ps5bo93lrmf1hsqhln2aq81m.apps.googleusercontent.com"
   const [user, setUser] = useState({});
   const [loggeIn, setLoggetInfo] = useState(false); 
+  const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar la ventana emergente
+  const handleCloseModalAndRedirect = () => {
+    setIsModalOpen(false);
+    window.location.replace('/login'); // Redirige a la página de inicio de sesión
+  };
+  
 
   const onSuccess = (response) => {
     setUser(response.profileObj);
     document.getElementsByClassName("btn").hidden = true;
     console.log("Inicio sesion");
+    setIsModalOpen(true)
   }
   const onFailure = (response) => {
     console.log("Error de inicio");
@@ -93,7 +98,7 @@ const Registro = () => {
               onChange={handleChange}
             />
          </div>
-          <button type="submit">Iniciar Sesión</button>
+          <button type="submit">Registrarse</button>
           <GoogleLogin className='btn-google'
               clientId={clientID}
               onSuccess={onSuccess}
@@ -103,8 +108,28 @@ const Registro = () => {
           />
           
           <div className='opciones'>
-            <span>Registrarse |</span> <span> Ayuda</span> 
+            <span><a href='/Login'>¿Ya tienes una cuenta? </a>|</span> <span> Ayuda</span> 
           </div>
+          <Modal
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+        contentLabel="Usuario registrado"
+        className="modal" // Aplica estilos a la modal
+        overlayClassName="modal-overlay" // Aplica estilos al fondo de la modal
+      >
+        <div className="modal-content">
+          <h2>Usuario registrado</h2>
+          <div className="user-info">
+            <div className="user-image">
+              <img src={user.imageUrl} alt="Foto de usuario" />
+            </div>
+            <p>Nombre de usuario: {user.name}</p>
+          </div>
+          <div className="button-container">
+            <button onClick={handleCloseModalAndRedirect}>Aceptar</button>
+          </div>
+        </div>
+      </Modal>
         </form>
       </div>
     </div>

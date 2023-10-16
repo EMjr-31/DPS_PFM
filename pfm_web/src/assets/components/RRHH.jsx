@@ -10,8 +10,8 @@ function RRHH({user}) {
   const [selectedItem, setSelectedItem] = useState(null);
 
   useEffect(() => {
-    // Realiza una solicitud a la API para obtener datos JSON
-    fetch('http://127.0.0.1:8000/api/propuestas')
+    // Realiza una solicitud a la API para obtener datos JSON de plazas de trabajo
+    fetch('http://127.0.0.1:8000/api/plazas-trabajo')
       .then(response => response.json())
       .then(data => {
         setData(data);
@@ -30,34 +30,44 @@ function RRHH({user}) {
         </div>
         {/* Opciones en el lado izquierdo */}
         <ul>
-            <li> 
-                <div className='opcion' id='op_seleccionada'>
+        <li> 
+              <a href='/Gerencia'>
+              <div className='opcion'>
                     <FontAwesomeIcon icon={faBriefcase}/> 
                     <p>Gerencia</p> 
                     <FontAwesomeIcon icon={faChevronRight}/> 
                 </div>
+              </a>
             </li>
             <li> 
-                <div className='opcion'>
+              <a href='/Comercial'>
+              <div className='opcion'>
                     <FontAwesomeIcon icon={faShop}/> 
                     <p>Comercial</p> 
                     <FontAwesomeIcon icon={faChevronRight}/> 
                 </div>
+              </a>
             </li>
             <li> 
-                <div className='opcion'>
+            <a href='/RRHH'>
+                <div className='opcion' id='op_seleccionada'>
                     <FontAwesomeIcon icon={faUsers}/> 
                     <p>Recursos Humanos</p> 
                     <FontAwesomeIcon icon={faChevronRight}/> 
                 </div>
+            </a>
             </li>
             <li> 
-                <div className='opcion'>
+            <a href='/Historial'>
+            <div className='opcion'>
                     <FontAwesomeIcon icon={faClock}/> 
                     <p>Historial</p> 
                     <FontAwesomeIcon icon={faChevronRight}/> 
                 </div>
+            </a>
+               
             </li>
+
           {/* Agrega más opciones según tus necesidades */}
         </ul>
         {/* Opciones de ajustes y cerrar sesión en la parte inferior */}
@@ -66,10 +76,12 @@ function RRHH({user}) {
                     <p>Ajustes</p> 
                     <FontAwesomeIcon icon={faGear}/> 
                 </div>
-                <div className='opcion'>
-                    <p>Cerrar Sesion</p> 
-                    <FontAwesomeIcon icon={faRightFromBracket}/> 
-                </div>
+                <a href='/login'>
+                  <div className='opcion'>
+                      <p>Cerrar Sesion</p> 
+                      <FontAwesomeIcon icon={faRightFromBracket}/> 
+                  </div>
+                </a>
         </div>
       </div>
       <div className="content">
@@ -90,46 +102,48 @@ function RRHH({user}) {
         </div>
         {/* Tabla de datos con opciones de ver, eliminar y modificar */}
         <div className="table-container">
-  <h2>Título de la Tabla</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Fecha de Envío</th>
-        <th>ID de Ejecutivo Comercial</th>
-        <th>ID de Cliente</th>
-        <th>Tipo de Propuesta</th>
-        <th>Monto de Propuesta</th>
-        <th>Descuento</th>
-        <th>Estado de Propuesta</th>
-        <th>Fecha de Actualización</th>
-        <th>Comentarios de Seguimiento</th>
-        <th>Opciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      {data.map((item, index) => (
-        <tr key={index}>
-          <td>{item.id}</td>
-          <td>{item.FechaEnvioPropuesta}</td>
-          <td>{item.UsuarioEjecutivoComercialID}</td>
-          <td>{item.ClienteID}</td>
-          <td>{item.TipoPropuestaEnviada}</td>
-          <td>{item.MontoPropuesta}</td>
-          <td>{item.Descuento}</td>
-          <td>{item.EstadoPropuesta}</td>
-          <td>{item.FechaActualizacionSeguimiento}</td>
-          <td>{item.ComentariosSeguimiento}</td>
-          <td className="opciones-contenedor">
-            <button className='btn btn-ver'> <FontAwesomeIcon icon={faEye}/> </button>
-            <button className='btn btn-modificar'> <FontAwesomeIcon icon={faPen}/> </button>
-            <button className='btn btn-eliminar'> <FontAwesomeIcon icon={faTrash}/> </button>
-          </td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-</div>
+          <h2>Plazas</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre de Plaza</th>
+                <th>Propuesta ID</th>
+                <th>ID de Recursos Humanos</th>
+                <th>Salario</th>
+                <th>Cantidad Solicitada</th>
+                <th>Fecha de Recepción Validación Perfil</th>
+                <th>Fecha de Modificación Perfil</th>
+                <th>Fecha de Publicación Perfil</th>
+                <th>Estatus</th>
+                <th>Fecha de Finalización</th>
+                <th>Opciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map(item => (
+                <tr key={item.id}>
+                  <td>{item.id}</td>
+                  <td>{item.nombre_plaza}</td>
+                  <td>{item.propuesta_id}</td>
+                  <td>{item.usuario_recurso_humanos_id}</td>
+                  <td>{item.salario}</td>
+                  <td>{item.cantidad_solicitada}</td>
+                  <td>{item.fecha_recepcion_validacion_perfil}</td>
+                  <td>{item.fecha_modificacion_perfil}</td>
+                  <td>{item.fecha_publicacion_perfil}</td>
+                  <td>{item.estatus}</td>
+                  <td>{item.fecha_finalizacion}</td>
+                  <td className="opciones-contenedor">
+                    <button className='btn btn-ver'> <FontAwesomeIcon icon={faEye} /> </button>
+                    <button className='btn btn-modificar'> <FontAwesomeIcon icon={faPen} /> </button>
+                    <button className='btn btn-eliminar'> <FontAwesomeIcon icon={faTrash} /> </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
 
         {/* Gráfica */}

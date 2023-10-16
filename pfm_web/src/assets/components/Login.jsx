@@ -16,7 +16,8 @@ const Login = () => {
 
   const onSuccess = (response) => {
     setUser(response.profileObj);
-    console.log(user)
+    localStorage.setItem('user', JSON.stringify(user));
+    window.location.replace(`/Dashboard?user=${user}`);
   }
   const onFailure = (response) => {
     console.log("Something went wrong");
@@ -61,7 +62,7 @@ const Login = () => {
           />
 
           <div className='opciones'>
-            <span>Registrarse |</span> <span> Ayuda</span> 
+            <span><a href='/Registro'>Registrarse</a>  | </span> <span> Ayuda</span> 
           </div>
         </form>
       </div>
